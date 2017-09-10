@@ -1,4 +1,4 @@
-import { logError } from '@riim/error-logger';
+import { error } from '@riim/logger';
 
 let queue: Array<{
 	callback: Function;
@@ -14,7 +14,7 @@ function run() {
 		try {
 			item.callback.call(item.context);
 		} catch (err) {
-			logError(err);
+			error(err);
 		}
 	}
 }

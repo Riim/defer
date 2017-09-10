@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var error_logger_1 = require("@riim/error-logger");
+var logger_1 = require("@riim/logger");
 var queue;
 function run() {
     var track = queue;
@@ -11,7 +11,7 @@ function run() {
             item.callback.call(item.context);
         }
         catch (err) {
-            error_logger_1.logError(err);
+            logger_1.error(err);
         }
     }
 }
