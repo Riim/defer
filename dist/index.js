@@ -6,21 +6,21 @@ function run() {
     var track = queue;
     queue = null;
     for (var _i = 0, track_1 = track; _i < track_1.length; _i++) {
-        var item = track_1[_i];
+        var callback = track_1[_i];
         try {
-            item.callback.call(item.context);
+            callback();
         }
         catch (err) {
             logger_1.error(err);
         }
     }
 }
-function defer(callback, context) {
+function defer(callback) {
     if (queue) {
-        queue.push({ callback: callback, context: context });
+        queue.push(callback);
     }
     else {
-        queue = [{ callback: callback, context: context }];
+        queue = [callback];
         setTimeout(run, 1);
     }
 }

@@ -1,29 +1,26 @@
 import { error } from '@riim/logger';
 
-let queue: Array<{
-	callback: Function;
-	context: any;
-}> | null;
+let queue: Array<Function> | null;
 
 function run() {
 	let track = queue!;
 
 	queue = null;
 
-	for (let item of track) {
+	for (let callback of track) {
 		try {
-			item.callback.call(item.context);
+			callback();
 		} catch (err) {
 			error(err);
 		}
 	}
 }
 
-export function defer(callback: Function, context?: any) {
+export function defer(callback: Function) {
 	if (queue) {
-		queue.push({ callback, context });
+		queue.push(callback);
 	} else {
-		queue = [{ callback, context }];
+		queue = [callback];
 		setTimeout(run, 1);
 	}
 }

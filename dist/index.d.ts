@@ -1,1 +1,1 @@
-export declare function defer(callback: Function, context?: any): void;
+export declare function defer(callback: Function): void;
