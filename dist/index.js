@@ -1,17 +1,18 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var logger_1 = require("@riim/logger");
-var queue;
+const utils_1 = require("./utils");
+var config_1 = require("./config");
+exports.configure = config_1.configure;
+let queue;
 function run() {
-    var track = queue;
+    let track = queue;
     queue = null;
-    for (var _i = 0, track_1 = track; _i < track_1.length; _i++) {
-        var callback = track_1[_i];
+    for (let callback of track) {
         try {
             callback();
         }
         catch (err) {
-            logger_1.error(err);
+            utils_1.logError(err);
         }
     }
 }

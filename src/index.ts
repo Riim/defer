@@ -1,4 +1,6 @@
-import { error } from '@riim/logger';
+import { logError } from './utils';
+
+export { configure } from './config';
 
 let queue: Array<Function> | null;
 
@@ -11,7 +13,7 @@ function run() {
 		try {
 			callback();
 		} catch (err) {
-			error(err);
+			logError(err);
 		}
 	}
 }
